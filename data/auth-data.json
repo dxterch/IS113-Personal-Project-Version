@@ -1,0 +1,11 @@
+[
+  {
+    "UID": "U001",
+    "Username": "alex_music",
+    "Password": "password123",
+    "Email": "alex@example.com",
+    "DOB": "1995-05-15",
+    "DateJoined": "2024-01-10",
+    "LastOpened": "2026-03-14"
+  }
+]

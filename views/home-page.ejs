@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Homepage - Mini Spotify</title></head>
+<body>
+    <nav>
+        <a href="/auth/home/<%= uid %>">Homepage</a> | 
+        <a href="/songs/search?uid=<%= uid %>">Search Songs</a>
+    </nav>
+    <hr>
+    <!-- Personalized Greeting -->
+    <h1>Welcome Back <%= username %>!</h1>
+
+    <main>
+        <!-- Playlists Section -->
+        <section>
+            <h2>Your Playlists: <a href="/playlists/create/<%= uid %>"><button type="button">+</button></a></h2>
+            <table border="1">
+                <thead>
+                    <tr><th>Select</th><th>Name</th><th>Date Created</th></tr>
+                </thead>
+                <tbody>
+                    <% playlists.forEach(p => { %>
+                        <tr>
+                            <td><input type="checkbox" name="pids" value="<%= p.PID %>"></td>
+                            <td><a href="/playlists/details/<%= p.PID %>"><%= p.PName %></a></td>
+                            <td><%= p.DateCreated %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            <br>
+            <button type="button">Delete</button>
+        </section>
+
+        <!-- Your Reviews Section -->
+        <section>
+            <h2>Your Reviews: <a href="/reviews/post/<%= uid %>"><button type="button">+</button></a></h2>
+            <table border="1">
+                <thead>
+                    <tr><th>Select</th><th>Song</th><th>Artist</th><th>Rating</th></tr>
+                </thead>
+                <tbody>
+                    <% reviews.forEach(r => { %>
+                        <tr>
+                            <td><input type="checkbox" name="rids" value="<%= r.RID %>"></td>
+                            <td><%= r.SongName %></td>
+                            <td><%= r.ArtistName %></td>
+                            <td><%= r.Rating %> / 5</td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            <br>
+            <button type="button">Delete</button>
+        </section>
+    </main>
+</body>
+</html>

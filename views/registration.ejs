@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+</head>
+<body>
+
+    <h2>Register Page</h2>
+
+    <% if (error) { %>
+        <p><strong><%= error %></strong></p>
+    <% } %>
+
+    <form action="/auth/register" method="POST">
+        <div>
+            <label>User name:</label>
+            <input type="text" name="username" required>
+        </div>
+        <br>
+        
+        <div>
+            <label>Password:</label>
+            <input type="password" name="password" required>
+        </div>
+        <br>
+
+        <div>
+            <label>Confirm Password:</label>
+            <input type="password" name="confirmPassword" required>
+        </div>
+        <br>
+
+        <div>
+            <label>DOB:</label>
+            <input type="date" name="dob" required>
+        </div>
+        <br>
+
+        <div>
+            <label>Email:</label>
+            <input type="email" name="email" required>
+        </div>
+        <br>
+        
+        <button type="submit">Create Account</button>
+    </form>
+
+    <br>
+    <a href="/auth/login">-> Go to Login Page</a>
+
+</body>
+</html>
