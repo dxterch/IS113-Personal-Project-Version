@@ -21,9 +21,11 @@ server.use("/", express.static(path.join(__dirname, "public")));
 // Routing is delegated to separate files to maintain a "thin" server structure
 const authRoutes = require("./routes/auth-routes");
 const playlistRoutes = require("./routes/playlist-routes");
+const songRoutes = require("./routes/song-routes");
 // Mounting all authentication and dashboard routes under the /auth prefix
 server.use("/auth", authRoutes);
 server.use("/playlists", playlistRoutes);
+server.use("/songs", songRoutes);
 
 /* 
    Note: As your project grows, you will mount other routes here:
