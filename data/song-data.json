@@ -1,0 +1,82 @@
+[
+  {
+    "SID": "S001",
+    "name": "Hills",
+    "artist": "The Weeknd",
+    "avg_review": 5,
+    "album_cover": "/images/hills.png",
+    "genre": "R&B"
+  },
+  {
+    "SID": "S002",
+    "name": "Back to me",
+    "artist": "Kanye West",
+    "avg_review": 4.1,
+    "album_cover": "/images/vultures.jpg",
+    "genre": "Hip-Hop"
+  },
+  {
+    "SID": "S003",
+    "name": "Noir",
+    "artist": "Sho",
+    "avg_review": 3.7,
+    "album_cover": "/images/noir.jpg",
+    "genre": "Lo-Fi"
+  },
+  {
+    "SID": "S004",
+    "name": "Blinding Lights",
+    "artist": "The Weeknd",
+    "avg_review": 4.8,
+    "album_cover": "/images/blinding_lights.png",
+    "genre": "Synth-pop"
+  },
+  {
+    "SID": "S005",
+    "name": "Runaway",
+    "artist": "Kanye West",
+    "avg_review": 4.9,
+    "album_cover": "/images/runaway.jpg",
+    "genre": "Art Pop"
+  },
+  {
+    "SID": "S006",
+    "name": "Levitating",
+    "artist": "Dua Lipa",
+    "avg_review": 4.2,
+    "album_cover": "/images/levitating.jpg",
+    "genre": "Dance-pop"
+  },
+  {
+    "SID": "S007",
+    "name": "Circles",
+    "artist": "Post Malone",
+    "avg_review": 4.5,
+    "album_cover": "/images/circles.jpg",
+    "genre": "Soft Rock"
+  },
+  {
+    "SID": "S008",
+    "name": "Bad Guy",
+    "artist": "Billie Eilish",
+    "avg_review": 4.3,
+    "album_cover": "/images/bad_guy.jpg",
+    "genre": "Electropop"
+  },
+  {
+    "SID": "S009",
+    "name": "Starboy",
+    "artist": "The Weeknd",
+    "avg_review": 4.7,
+    "album_cover": "/images/starboy.jpg",
+    "genre": "R&B"
+  },
+  {
+    "SID": "S010",
+    "name": "God's Plan",
+    "artist": "Drake",
+    "avg_review": 4.0,
+    "album_cover": "/images/gods_plan.jpg",
+    "genre": "Hip-Hop"
+  }
+]
