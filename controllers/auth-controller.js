@@ -52,28 +52,28 @@ exports.handleRegister = async (req, res) => {
 
 exports.showDashboard = async (req, res) => {
     try {
-        const { uid } = req.params; // Extract User ID from URL [7, 8]
+        const { uid } = req.params;
 
-        // Multi-schema retrieval from three separate JSON data sources [1, 6]
-        const user = await User.findUserByUID(uid); 
+        // Authorization Check: Redirect guests away from the dashboard
+        if (uid === "guest") {
+            return res.redirect("/songs/search?uid=guest");
+        }
+
+        const user = await User.findUserByUID(uid);
+        if (!user) return res.status(404).send("User not valid");
+
         const playlists = await Playlist.getByUser(uid);
         const reviews = await Review.getByUser(uid);
 
-        if (!user) return res.status(404).send("User not valid");
-
-        // Layout requirement: Most recently created/updated items appear first [4]
-        const recentPlaylists = playlists.reverse();
-        const recentReviews = reviews.reverse();
-
-        // Delegate to View: Pass data to home-page.ejs [9, 10]
-        res.render("home-page", { 
+        res.render("home-page", {
             uid,
-            username: user.Username, 
-            playlists: recentPlaylists, 
-            reviews: recentReviews 
+            username: user.Username,
+            playlists: playlists.reverse(),
+            reviews: reviews.reverse()
         });
     } catch (err) {
         res.status(500).send("Error loading dashboard data.");
     }
 };
+
 

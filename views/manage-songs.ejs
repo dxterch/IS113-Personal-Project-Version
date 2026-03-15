@@ -7,82 +7,92 @@
 </head>
 <body>
     <img src="/images/spotify_logo.png" alt="logo" height="100" width="250">
-    <h1>This is the Songs Management Page</h1>
+    <h1>Music Library</h1>
 
-    <a href="/index.html" id="#top"><img src="/images/returnhome.jpg" alt="returnhome" height="50" width="150"></a>
+    <!-- 1. Context-Aware Navigation -->
+    <nav>
+        <% if (uid !== "guest") { %>
+            <a href="/auth/home/<%= uid %>">Homepage</a> |
+            <a href="/songs/search?uid=<%= uid %>">Search Songs</a> |
+            <a href="/auth/logout">Logout</a>
+        <% } %>
+        <a href="/index.html">Exit to Welcome Page</a>
+    </nav>
     <br>
 
+    <!-- 2. Guest-Specific Messaging -->
+    <% if (uid === "guest") { %>
+        <p><i>You are currently browsing as a <b>Guest</b>. <a href="/auth/login">Login</a> or <a href="/auth/register">Register</a> to create your own playlists!</i></p>
+    <% } %>
+
+    <hr>
+
+    <!-- 3. Maintain UID in Search Form -->
     <form action="/songs-page" method="post">
-        <input type="text" name="songSearch" id="songSearch" placeholder="🔎What do you want to listen to?" size="25" >
+        <!-- Hidden input ensures the server still knows the user is a guest after searching -->
+        <input type="hidden" name="uid" value="<%= uid %>">
+        <input type="text" name="songSearch" id="songSearch" placeholder="🔎 What do you want to listen to?" size="25" value="<%= search %>">
         <button type="submit">SEARCH</button>
     </form><br>
 
-     <% if (!search){ %>
-    <table border="2">
-        <tr>
-            <th></th>
-            <th>
-                Songs
-            </th>
-            <th>
-                Artist
-            </th>
-            <th>
-                Rating
-            </th>
-        </tr>
-        <% for (let song_id in songs){ %>
-        <tr>
-            <td>
-                <img src="<%=songs[song_id].album_cover %>" height="100" width="100">
-            </td>
-            <td>
-                <%=songs[song_id].name %>
-            </td>
-            <td>
-                <%=songs[song_id].artist %>
-            </td>
-            <td>
-                <%=songs[song_id].avg_review %>
-            </td>
-        </tr>
-        <% } %>
-    </table>
-    <% }else{%>
-        <table border="1">
-        <tr>
-            <th></th>
-            <th>
-                Songs
-            </th>
-            <th>
-                Artist
-            </th>
-            <th>
-                Rating
-            </th>
-        </tr>
-        <% for (let song_id in songs){ %>
-            <% if (songs[song_id].name.toLowerCase().includes(search.toLowerCase())) {%>
+    <!-- Display Table (Logic remains the same, but ensure data fields match your schema) -->
+    <% if (!search) { %>
+        <table border="2">
+            <thead>
                 <tr>
-            <td>
-                <img src="<%=songs[song_id].album_cover %>" height="100" width="100">
-            </td>
-            <td>
-                <%=songs[song_id].name %>
-            </td>
-            <td>
-                <%=songs[song_id].artist %>
-            </td>
-            <td>
-                <%=songs[song_id].avg_review %>
-            </td>
-        </tr>
-            <% } %>   
-        <% } %>
+                    <th>Cover</th>
+                    <th>Songs</th>
+                    <th>Artist</th>
+                    <th>Rating</th>
+                    <!-- 4. Conditional Action Column -->
+                    <% if (uid !== "guest") { %> <th>Actions</th> <% } %>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (let song_id in songs) { %>
+                <tr>
+                    <td><img src="<%= songs[song_id].album_cover %>" height="100" width="100"></td>
+                    <td><%= songs[song_id].name %></td>
+                    <td><%= songs[song_id].artist %></td>
+                    <td><%= songs[song_id].avg_review %> / 5</td>
+                    <% if (uid !== "guest") { %>
+                        <td><button type="button">Add to Playlist</button></td>
+                    <% } %>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <!-- Search Results Table -->
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Cover</th>
+                    <th>Songs</th>
+                    <th>Artist</th>
+                    <th>Rating</th>
+                    <% if (uid !== "guest") { %> <th>Actions</th> <% } %>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (let song_id in songs) { %>
+                    <% if (songs[song_id].name.toLowerCase().includes(search.toLowerCase())) { %>
+                    <tr>
+                        <td><img src="<%= songs[song_id].album_cover %>" height="100" width="100"></td>
+                        <td><%= songs[song_id].name %></td>
+                        <td><%= songs[song_id].artist %></td>
+                        <td><%= songs[song_id].avg_review %></td>
+                        <% if (uid !== "guest") { %>
+                            <td><button type="button">Add to Playlist</button></td>
+                        <% } %>
+                    </tr>
+                    <% } %>   
+                <% } %>
+            </tbody>
         </table>
     <% } %>
     
+    <br>
     <a href="#top">Back to the top</a>
 </body>
 </html>
