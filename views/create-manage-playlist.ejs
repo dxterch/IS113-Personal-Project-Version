@@ -1,0 +1,33 @@
+<body>
+    <nav>
+        <a href="/auth/home/<%= uid %>">Homepage</a> | 
+        <a href="/songs/search?uid=<%= uid %>">Search Songs</a>
+    </nav>
+    
+    <!-- Dynamic Header based on the 'playlist' variable [2] -->
+    <h1><%= playlist ? `Edit ${playlistName}` : "New Playlist" %></h1>
+    
+    <% if (error) { %> <p style="color: red;"><%= error %></p> <% } %>
+
+    <form action="/playlists/create" method="POST">
+        <input type="hidden" name="uid" value="<%= uid %>">
+        
+        <h3>Playlist Name:</h3>
+        <input name="playlistName" value="<%= playlistName %>" required>
+
+        <h3>Add a caption!</h3>
+        <textarea name="description"></textarea>
+
+        <h3>Select Songs:</h3>
+        <% songs.forEach(song => { %>
+            <input type="checkbox" name="songs" value="<%= song.SID %>"
+            <% if (playlist && playlist.Songs.includes(song.SID)) { %> checked <% } %>>
+            <%= song.song_name %> - <%= song.artist %> 
+            <br>
+        <% }) %>
+        <br>
+        <button type="submit">
+            <%= playlist ? "Update Playlist" : "Create Playlist" %>
+        </button>
+    </form>
+</body>

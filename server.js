@@ -27,17 +27,11 @@ server.use("/auth", authRoutes);
 server.use("/playlists", playlistRoutes);
 server.use("/songs", songRoutes);
 
-/* 
-   Note: As your project grows, you will mount other routes here:
-   const songRoutes = require("./routes/song-routes");
-   server.use("/songs", songRoutes); 
-*/
-
 // 6. Start the Server
 const hostname = "localhost";
 const port = 8000; 
 
 server.listen(port, hostname, () => {
-    console.log(`Mini Spotify Server is running at http://${hostname}:${port}/index.html`);
+    console.log(`Mini Spotify Server is running at http://${hostname}:${port}/`);
     console.log("Press CTRL + C to stop the server manually.");
 });

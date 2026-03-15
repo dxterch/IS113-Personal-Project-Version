@@ -13,4 +13,7 @@ router.post("/register", authController.handleRegister);
 // Context via UID
 router.get("/home/:uid", authController.showDashboard); 
 
+// Logout to Welcome Page
+router.get("/logout", authController.handleLogout);
+
 module.exports = router;

@@ -17,6 +17,11 @@ exports.handleLogin = async (req, res) => {
     }
 };
 
+// Function to handle logout and redirect to the public welcome page
+exports.handleLogout = (req, res) => {
+    res.redirect("/index.html"); 
+};
+
 exports.showRegisterPage = (req, res) => res.render("registration", { error: null });
 
 exports.handleRegister = async (req, res) => {
